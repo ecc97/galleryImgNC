@@ -1,20 +1,20 @@
-import Image from "next/image";
+import GalleryTemplate from "@/components/UI/templates/GalleryTemplate";
 
-export default async function Home() {
-  const response = await fetch(`${process.env.BASE_URL}/api/pexels`);
+interface IParamsProps {
+  searchParams: {
+    query?: string;
+    page?: string;
+  }
+}
+
+export default async function Home({ searchParams }: IParamsProps) {
+  const { query } = await searchParams;
+  const finalQuery = query || "popular"; 
+  const response = await fetch(`${process.env.BASE_URL}/api/pexels?query=${finalQuery}`);
   const data = await response.json();
-  const images = data.photos;
-  console.log(images)
+  console.log(data)
+  
   return (
-    <main className="p-6">
-            <h1 className="text-2xl font-bold mb-4">Galería de Imágenes</h1>
-            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-                {images.map((img: any) => (
-                    <div key={img.id} className="relative w-full h-60">
-                        <Image src={img.src.medium} alt={img.photographer} layout="fill" objectFit="cover" className="rounded-lg" />
-                    </div>
-                ))}
-            </div>
-        </main>
+    <GalleryTemplate dataGallery={data}/>
   );
 }

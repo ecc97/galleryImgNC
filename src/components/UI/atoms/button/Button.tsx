@@ -14,9 +14,9 @@ interface ButtonProps {
     children: React.ReactNode;
 }
 
-function Button({ onClick, className, children}: ButtonProps) {
+function Button({ onClick, className, color, children}: ButtonProps) {
   return (
-    <button onClick={onClick} className={`btn ${className}`}>
+    <button onClick={onClick} className={`btn ${className} ${[color]}`}>
         {children}
     </button>
   )

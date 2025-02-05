@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Inter, Roboto } from "next/font/google";
+import Header from "@/components/UI/organisms/header/Header";
 import "../styles/globals.scss";
 
 const inter = Inter({

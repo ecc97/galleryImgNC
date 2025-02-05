@@ -18,8 +18,6 @@ function GalleryTemplate({ dataGallery }: GalleryTemplateProps) {
 
     return (
         <main className="p-6">
-            <h1 className="text-2xl font-bold mb-4 text-center">Galería de Imágenes</h1>
-            <SearchBar />
             {loading ? (
                 <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
                 {[...Array(8)].map((_, index) => (

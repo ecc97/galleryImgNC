@@ -12,7 +12,7 @@ export default function SearchBar() {
 
     const handleSearch = () => {
         if (query.trim()) {
-            router.push(`/?query=${query}`);
+            router.push(`/results?query=${query}`);
         }
     };
 

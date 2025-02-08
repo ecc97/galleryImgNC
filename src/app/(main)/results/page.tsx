@@ -8,14 +8,16 @@ interface IParamsProps {
 }
 
 export default async function ResultsPage({ searchParams }: IParamsProps) {
-  const { query } = await searchParams;
-  const page = searchParams.page ? Number(searchParams.page) : 1;
+  const params = await searchParams;
+  const { query } = params;
+  const page = params.page ? Number(params.page) : 1;
   if (!query) {
     return <p className="text-center text-gray-500 mt-10">Ingresa un término de búsqueda.</p>;
   }
 
-  const response = await fetch(`${process.env.BASE_URL}/api/search?query=${query}?page=${page}`);
+  const response = await fetch(`${process.env.BASE_URL}/api/search?page=${page}&query=${query}`);
   const data = await response.json();
+  console.log(data)
 
   return <ResultsTemplate dataGallery={data} />;
 }

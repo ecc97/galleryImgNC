@@ -1,7 +1,7 @@
-export const getSearchImages = async (query: string, perPage: number = 20) => {
+export const getSearchImages = async (query: string, page: number, perPage: number = 20) => {
     const API_KEY = process.env.PEXELS_API_KEY;
     try {
-        const response = await fetch(`https://api.pexels.com/v1/search?query=${query}&per_page=${perPage}`, {
+        const response = await fetch(`https://api.pexels.com/v1/search?page=${page}&per_page=${perPage}&query=${query}`, {
             headers: {
                 Authorization: API_KEY as string,
             },

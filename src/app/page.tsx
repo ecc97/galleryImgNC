@@ -10,7 +10,8 @@ interface IParamsProps {
 }
 
 export default async function Home({ searchParams }: IParamsProps) {
-  const page = searchParams.page ? Number(searchParams.page) : 1;
+  const params = await searchParams;
+  const page = params.page ? Number(params.page) : 1;
   const response = await fetch(`${process.env.BASE_URL}/api/curated?page=${page}`);
   const data = await response.json();
   console.log(data)

@@ -12,11 +12,12 @@ interface PaginationProps {
 function Pagination({ totalPages }: PaginationProps) {
     const router = useRouter();
     const searchParams = useSearchParams();
-    const currentPage = Number(searchParams.get("page")) || 1;
+    const currentPage = Number(searchParams.get("page") ?? "1");
     const goToChangePage = (newPage: number) => {
+        if (newPage < 1 || newPage > totalPages) return;
         const params = new URLSearchParams(searchParams.toString());
         params.set("page", newPage.toString());
-        router.push(`?${params.toString()}`);
+        router.push(`?${params.toString()}`, { scroll: false });
     };
     
     return (
@@ -24,13 +25,13 @@ function Pagination({ totalPages }: PaginationProps) {
             <Button
                 onClick={() => goToChangePage(currentPage - 1)}
                 disabled={currentPage <= 1}
-                className="px-4 py-2 bg-gray-200 rounded disabled:opacity-50 text-black">
+                className={`px-4 py-2 rounded ${currentPage <= 1 ? "bg-gray-300 text-gray-500 cursor-not-allowed" : "bg-gray-200 text-black"}`}>
                 Anterior
             </Button>
             <span className="px-4 py-2">Página {currentPage} de {totalPages}</span>
             <Button
                 onClick={() => goToChangePage(currentPage + 1)}
-                className="px-4 py-2 bg-blue-500 text-white rounded"
+                className={`px-4 py-2 rounded ${currentPage >= totalPages ? "bg-gray-300 text-gray-500 cursor-not-allowed" : "bg-blue-500 text-white"}`}
                 disabled={currentPage >= totalPages}
                 >
                 Siguiente

@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import { fetchPexelsImages } from "../../infraestructure/services/pexels.service";
+import { getSearchImages } from "../../infraestructure/services/pexels.service";
 
 export async function GET(request: Request){
     try {
@@ -8,7 +8,7 @@ export async function GET(request: Request){
         if (!query) {
             query = "popular";
         }
-        const data = await fetchPexelsImages(query);
+        const data = await getSearchImages(query);
         return NextResponse.json(data, { status: 200});
     } catch (error) {
         console.error(error);

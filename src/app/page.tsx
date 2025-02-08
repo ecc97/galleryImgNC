@@ -5,15 +5,13 @@ import GalleryTemplate from "@/components/UI/templates/GalleryTemplate";
 
 interface IParamsProps {
   searchParams: {
-    query?: string;
     page?: string;
   }
 }
 
 export default async function Home({ searchParams }: IParamsProps) {
-  const { query } = await searchParams;
-  const finalQuery = query || "popular";
-  const response = await fetch(`${process.env.BASE_URL}/api/pexels?query=${finalQuery}`);
+  const page = searchParams.page ? Number(searchParams.page) : 1;
+  const response = await fetch(`${process.env.BASE_URL}/api/curated?page=${page}`);
   const data = await response.json();
   console.log(data)
 
@@ -23,7 +21,7 @@ export default async function Home({ searchParams }: IParamsProps) {
         <Navbar />
         <Hero />
       </Header>
-      <GalleryTemplate dataGallery={data} />
+      <GalleryTemplate dataGallery={data} currentPage={page} />
     </>
   );
 }

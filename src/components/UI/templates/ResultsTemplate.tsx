@@ -3,6 +3,7 @@ import React, { useState, useEffect } from "react";
 import { GalleryResponse, Photo } from "@/interfaces/gallery";
 import Image from "next/image";
 import SearchBar from "../molecules/search/SearchBar";
+import Pagination from "../molecules/pagination/Pagination";
 
 interface ResultsTemplateProps {
     dataGallery: GalleryResponse;
@@ -11,6 +12,7 @@ interface ResultsTemplateProps {
 export default function ResultsTemplate({ dataGallery }: ResultsTemplateProps) {
     const [loading, setLoading] = useState(true);
     const images = dataGallery.photos || [];
+    const totalPages = Math.ceil(dataGallery.total_results / dataGallery.per_page);
 
     useEffect(() => {
         setLoading(false);
@@ -29,13 +31,16 @@ export default function ResultsTemplate({ dataGallery }: ResultsTemplateProps) {
             ) : images.length === 0 ? (
                 <p className="text-gray-500 text-center">No se encontraron imágenes.</p>
             ) : (
-                <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-                    {images.map((img: Photo) => (
-                        <div key={img.id} className="relative w-full h-60 overflow-hidden transition-transform duration-300 hover:scale-105">
-                            <Image src={img.src.medium} alt={img.photographer} layout="fill" objectFit="cover" className="rounded-lg opacity-0 transition-opacity duration-500" onLoadingComplete={(img) => img.classList.remove("opacity-0")} />
-                        </div>
-                    ))}
-                </div>
+                <>
+                    <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+                        {images.map((img: Photo) => (
+                            <div key={img.id} className="relative w-full h-60 overflow-hidden transition-transform duration-300 hover:scale-105">
+                                <Image src={img.src.medium} alt={img.photographer} layout="fill" objectFit="cover" className="rounded-lg opacity-0 transition-opacity duration-500" onLoadingComplete={(img) => img.classList.remove("opacity-0")} />
+                            </div>
+                        ))}
+                    </div>
+                    {totalPages > 1 && <Pagination totalPages={totalPages} />}
+                </>
             )}
         </main>
     );

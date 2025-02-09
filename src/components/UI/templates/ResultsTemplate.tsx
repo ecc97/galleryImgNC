@@ -4,6 +4,7 @@ import { GalleryResponse, Photo } from "@/interfaces/gallery";
 import Image from "next/image";
 import SearchBar from "../molecules/search/SearchBar";
 import Pagination from "../molecules/pagination/Pagination";
+import Filters from "../molecules/filters/Filters";
 
 interface ResultsTemplateProps {
     dataGallery: GalleryResponse;
@@ -22,6 +23,7 @@ export default function ResultsTemplate({ dataGallery }: ResultsTemplateProps) {
         <main className="p-6">
             <h1 className="text-2xl font-bold mb-4 text-center">Resultados de Búsqueda</h1>
             <SearchBar />
+            <Filters />
             {loading ? (
                 <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
                     {[...Array(8)].map((_, index) => (

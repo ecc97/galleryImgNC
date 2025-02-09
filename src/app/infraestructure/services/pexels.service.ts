@@ -1,7 +1,13 @@
-export const getSearchImages = async (query: string, page: number, perPage: number = 20) => {
+export const getSearchImages = async (query: string, page: number, orientation?: string, size?: string, color?: string, perPage: number = 20) => {
     const API_KEY = process.env.PEXELS_API_KEY;
     try {
-        const response = await fetch(`https://api.pexels.com/v1/search?page=${page}&per_page=${perPage}&query=${query}`, {
+        let url = `https://api.pexels.com/v1/search?page=${page}&per_page=${perPage}&query=${query}`;
+
+        if (orientation) url += `&orientation=${orientation}`;
+        if (size) url += `&size=${size}`;
+        if (color) url += `&color=${color}`;
+
+        const response = await fetch(url, {
             headers: {
                 Authorization: API_KEY as string,
             },

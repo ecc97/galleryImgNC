@@ -9,7 +9,12 @@ export async function GET(request: Request){
         if (!query) {
             query = "popular";
         }
-        const data = await getSearchImages(query, page);
+
+        const orientation = searchParams.get("orientation") || "";
+        const size = searchParams.get("size") || "";
+        const color = searchParams.get("color") || "";
+
+        const data = await getSearchImages(query, page, orientation, size, color);
         return NextResponse.json(data, { status: 200});
     } catch (error) {
         console.error(error);

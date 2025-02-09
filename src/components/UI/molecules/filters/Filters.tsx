@@ -1,95 +1,72 @@
 "use client";
-import { useState } from "react";
+import Select from "../../atoms/select/Select";
 import { useRouter, useSearchParams } from "next/navigation";
 
-// Valores permitidos según la API de Pexels
-const orientations = ["landscape", "portrait", "square"];
-const sizes = ["large", "medium", "small"];
-const colors = ["red", "orange", "yellow", "green", "turquoise", "blue", "violet", "pink", "brown", "black", "gray", "white"];
+const orientations = [
+  { value: "landscape", label: "Horizontal" },
+  { value: "portrait", label: "Vertical" },
+  { value: "square", label: "Cuadrado" },
+];
 
-// Diccionario para traducir al español
-const orientationLabels: Record<string, string> = {
-  landscape: "Horizontal",
-  portrait: "Vertical",
-  square: "Cuadrado",
-};
+const sizes = [
+  { value: "large", label: "Grande (24MP)" },
+  { value: "medium", label: "Mediano (12MP)" },
+  { value: "small", label: "Pequeño (4MP)" },
+];
 
-const sizeLabels: Record<string, string> = {
-  large: "Grande (24MP)",
-  medium: "Mediano (12MP)",
-  small: "Pequeño (4MP)",
-};
-
-const colorLabels: Record<string, string> = {
-  red: "Rojo",
-  orange: "Naranja",
-  yellow: "Amarillo",
-  green: "Verde",
-  turquoise: "Turquesa",
-  blue: "Azul",
-  violet: "Violeta",
-  pink: "Rosa",
-  brown: "Marrón",
-  black: "Negro",
-  gray: "Gris",
-  white: "Blanco",
-};
+const colors = [
+  { value: "red", label: "Rojo" },
+  { value: "orange", label: "Naranja" },
+  { value: "yellow", label: "Amarillo" },
+  { value: "green", label: "Verde" },
+  { value: "turquoise", label: "Turquesa" },
+  { value: "blue", label: "Azul" },
+  { value: "violet", label: "Violeta" },
+  { value: "pink", label: "Rosa" },
+  { value: "brown", label: "Marrón" },
+  { value: "black", label: "Negro" },
+  { value: "gray", label: "Gris" },
+  { value: "white", label: "Blanco" },
+];
 
 
 export default function Filters() {
   const router = useRouter();
   const searchParams = useSearchParams();
-  
+
 
   const handleFilterChange = (type: "orientation" | "size" | "color", value: string) => {
     const params = new URLSearchParams(searchParams.toString());
-    
+
     if (value) {
       params.set(type, value);
     } else {
       params.delete(type);
     }
-    
+
     router.push(`/results?${params.toString()}`, { scroll: false });
   };
 
   return (
     <div className="flex flex-wrap gap-4 mb-4">
-      {/* Filtro de Orientación */}
-      <select
+      <Select
+        label="Orientación"
         value={searchParams.get("orientation") || ""}
-        onChange={(e) => handleFilterChange("orientation", e.target.value)}
-        className="p-2 border rounded-md text-black"
-      >
-        <option value="">Cualquier orientación</option>
-        {orientations.map((orientation) => (
-          <option key={orientation} value={orientation}>{orientationLabels[orientation]}</option>
-        ))}
-      </select>
-
-      {/* Filtro de Tamaño */}
-      <select
+        options={orientations}
+        onChange={(value) => handleFilterChange("orientation", value)}
+      />
+      <Select
+        label="Tamaño"
         value={searchParams.get("size") || ""}
-        onChange={(e) => handleFilterChange("size", e.target.value)}
-        className="p-2 border rounded-md text-black"
-      >
-        <option value="">Cualquier tamaño</option>
-        {sizes.map((size) => (
-          <option key={size} value={size}>{sizeLabels[size]}</option>
-        ))}
-      </select>
-
-      {/* Filtro de Color */}
-      <select
+        options={sizes}
+        onChange={(value) => handleFilterChange("size", value)}
+      />
+      <Select
+        label="Color"
         value={searchParams.get("color") || ""}
-        onChange={(e) => handleFilterChange("color", e.target.value)}
-        className="p-2 border rounded-md text-black"
-      >
-        <option value="">Cualquier color</option>
-        {colors.map((color) => (
-          <option key={color} value={color}>{colorLabels[color]}</option>
-        ))}
-      </select>
+        options={colors}
+        onChange={(value) => handleFilterChange("color", value)}
+      />
     </div>
   );
 }

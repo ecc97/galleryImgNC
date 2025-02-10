@@ -4,6 +4,7 @@ import Image from "next/image";
 import { Photo } from "@/interfaces/gallery";
 import { IoMdClose } from "react-icons/io";
 import './imagemodal.sass'
+import Link from "next/link";
 
 interface ImageModalProps {
   photo: Photo | null;
@@ -23,12 +24,12 @@ export default function ImageModal({ photo, onClose }: ImageModalProps) {
         <div className="p-4">
           <h2 className="text-lg font-semibold text-black">{photo.photographer}</h2>
           <div className="flex flex-col mt-2">
-            <a href={photo.url} target="_blank" rel="noopener noreferrer" className="text-blue-500 hover:underline">
+            <Link href={photo.url} target="_blank" rel="noopener noreferrer" className="text-blue-500 hover:underline">
               Ver en Pexels
-            </a>
-            <a href={photo.photographer_url} target="_blank" rel="noopener noreferrer" className="text-blue-500 hover:underline">
+            </Link>
+            <Link href={photo.photographer_url} target="_blank" rel="noopener noreferrer" className="text-blue-500 hover:underline">
               Perfil del fotógrafo
-            </a>
+            </Link>
           </div>
         </div>
       </div>

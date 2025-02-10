@@ -2,6 +2,7 @@
 import React, { useState, useEffect } from "react";
 import { GalleryResponse, Photo } from '@/interfaces/gallery'
 import Pagination from "../molecules/pagination/Pagination";
+import ImageModal from "../organisms/modal/ImageModal";
 import Image from 'next/image'
 
 interface GalleryTemplateProps {
@@ -10,6 +11,7 @@ interface GalleryTemplateProps {
 }
 
 function GalleryTemplate({ dataGallery, currentPage }: GalleryTemplateProps) {
+    const [selectedImage, setSelectedImage] = useState<Photo | null>(null);
     const [loading, setLoading] = useState(true);
     const images = dataGallery.photos || [];
     const totalPages = Math.ceil(dataGallery.total_results / dataGallery.per_page);
@@ -32,12 +34,13 @@ function GalleryTemplate({ dataGallery, currentPage }: GalleryTemplateProps) {
                 <>
                     <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
                         {images.map((img: Photo) => (
-                            <div key={img.id} className="relative w-full h-60 overflow-hidden transition-transform duration-300 hover:scale-105">
+                            <div key={img.id} className="relative w-full h-60 overflow-hidden transition-transform duration-300 hover:scale-105" onClick={() => setSelectedImage(img)}>
                                 <Image src={img.src.medium} alt={img.photographer} layout="fill" objectFit="cover" className="rounded-lg opacity-0 transition-opacity duration-500" onLoadingComplete={(img) => img.classList.remove("opacity-0")}/>
                             </div>
                         ))}
                     </div>
                     {totalPages > 1 && <Pagination totalPages={totalPages} />}
+                    <ImageModal photo={selectedImage} onClose={() => setSelectedImage(null)} />
                 </>
             )}
         </main>

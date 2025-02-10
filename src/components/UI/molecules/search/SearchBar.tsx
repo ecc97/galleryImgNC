@@ -16,6 +16,12 @@ export default function SearchBar() {
         }
     };
 
+    const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+        if (e.key === "Enter") {
+            handleSearch();
+        }
+    }
+
     return (
         <div className="flex gap-2 mb-4 justify-center">
             <div className="relative w-full max-w-md">
@@ -25,6 +31,7 @@ export default function SearchBar() {
                     name="search"
                     value={query}
                     onChange={(e) => setQuery(e.target.value)}
+                    onKeyDown={handleKeyDown}
                     placeholder="Buscar imágenes..."
                     className="w-full pl-10 h-full"
                 />

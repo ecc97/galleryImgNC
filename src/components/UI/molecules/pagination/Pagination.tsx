@@ -26,7 +26,7 @@ function Pagination({ totalPages }: PaginationProps) {
                 onClick={() => goToChangePage(currentPage - 1)}
                 disabled={currentPage <= 1}
                 className={`px-4 py-2 rounded ${currentPage <= 1 ? "bg-gray-300 text-gray-500 cursor-not-allowed" : "bg-gray-200 text-black"}`}>
-                Anterior
+                &#10094;
             </Button>
             <span className="px-4 py-2">Página {currentPage} de {totalPages}</span>
             <Button
@@ -34,7 +34,7 @@ function Pagination({ totalPages }: PaginationProps) {
                 className={`px-4 py-2 rounded ${currentPage >= totalPages ? "bg-gray-300 text-gray-500 cursor-not-allowed" : "bg-blue-500 text-white"}`}
                 disabled={currentPage >= totalPages}
                 >
-                Siguiente
+                &#10095;
             </Button>
         </div>
     )

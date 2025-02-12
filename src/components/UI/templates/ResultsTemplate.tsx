@@ -40,7 +40,7 @@ export default function ResultsTemplate({ dataGallery }: ResultsTemplateProps) {
                     <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
                         {images.map((img: Photo) => (
                             <div key={img.id} className="relative w-full h-60 overflow-hidden transition-transform duration-300 hover:scale-105" onClick={() => setSelectedImage(img)}>
-                                <Image src={img.src.medium} alt={img.photographer} layout="fill" objectFit="cover" className="rounded-lg opacity-0 transition-opacity duration-500 cursor-pointer" onLoadingComplete={(img) => img.classList.remove("opacity-0")} />
+                                <Image src={img.src.medium} alt={img.alt} layout="fill" objectFit="cover" className="rounded-lg opacity-0 transition-opacity duration-500 cursor-pointer" onLoadingComplete={(img) => img.classList.remove("opacity-0")} />
                             </div>
                         ))}
                     </div>

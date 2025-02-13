@@ -48,7 +48,7 @@ export default function Filters() {
   };
 
   return (
-    <div className="flex flex-wrap gap-4 mb-4">
+    <div className="flex flex-nowrap flex-col gap-4 mb-4 md:flex-wrap md:flex-row">
       <Select
         label="Orientación"
         value={searchParams.get("orientation") || ""}

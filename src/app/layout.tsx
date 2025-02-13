@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { Inter, Roboto } from "next/font/google";
-import Header from "@/components/UI/organisms/header/Header";
+import Footer from "@/components/UI/organisms/footer/Footer";
 import "../styles/globals.scss";
 
 const inter = Inter({
@@ -32,6 +32,7 @@ export default function RootLayout({
         className={`${inter.variable} ${roboto.className} antialiased`}
       >
         {children}
+        <Footer />
       </body>
     </html>
   );

@@ -18,7 +18,7 @@ export default function ImageModal({ photo, onClose }: ImageModalProps) {
   if (!photo) return null;
 
   return (
-    <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50" onClick={onClose}>
+    <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50 p-4" onClick={onClose}>
       <div className="bg-white rounded-lg shadow-lg max-w-lg w-full relative">
         <Button className="absolute top-2 right-2 p-2 text-gray-600 hover:text-gray-900" onClick={onClose}>
             <IoMdClose size={24}/>

@@ -5,11 +5,12 @@ import './navbar.sass'
 
 interface NavbarProps {
     className?: string
+    colorBg?: 'primary-navigation' | 'secondary-navigation'
 }
 
-function Navbar({className}: NavbarProps) {
+function Navbar({className, colorBg}: NavbarProps) {
   return (
-    <nav className={`navbar ${className}`}>
+    <nav className={`navbar ${className} ${[colorBg]}`}>
         <Link href={'/'}>
             <h1 className='navbar__heading'>visionPX</h1>
         </Link>

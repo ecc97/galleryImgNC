@@ -8,11 +8,11 @@ interface SearchParams {
   size?: string;
 }
 
-interface IParamsProps {
-  searchParams?: SearchParams;
+interface Props {
+  searchParams: SearchParams;
 }
 
-export default async function ResultsPage({ searchParams = {} }: IParamsProps) {
+export default async function ResultsPage({ searchParams }: Props) {
   const { query, color, orientation, size } = searchParams;
   const page = searchParams.page ? Number(searchParams.page) : 1;
 

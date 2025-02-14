@@ -1,4 +1,5 @@
 import ResultsTemplate from "@/components/UI/templates/ResultsTemplate";
+import type { NextPage } from "next";
 
 interface IParamsProps {
   searchParams: {
@@ -10,7 +11,7 @@ interface IParamsProps {
   };
 }
 
-export default async function ResultsPage({ searchParams }: IParamsProps) {
+const ResultsPage: NextPage<IParamsProps> = async({ searchParams }) => {
   const params = searchParams;
   const { query, color, orientation, size } = params;
   const page = params.page ? Number(params.page) : 1;
@@ -32,3 +33,5 @@ export default async function ResultsPage({ searchParams }: IParamsProps) {
 
   return <ResultsTemplate dataGallery={data} />;
 }
+
+export default ResultsPage;

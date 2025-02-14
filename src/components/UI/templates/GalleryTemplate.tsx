@@ -22,7 +22,10 @@ function GalleryTemplate({ dataGallery }: GalleryTemplateProps) {
     }, [dataGallery]);
 
     return (
-        <Main className="p-6">
+        <Main className="p-6" id="allImages">
+            <div className="p-3">
+                <h1 className="text-2xl font-bold mb-4 text-center md:text-left">Explora su catálogo</h1>
+            </div>
             {loading ? (
                 <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
                     {[...Array(8)].map((_, index) => (

@@ -23,7 +23,7 @@ export default function ResultsTemplate({ dataGallery }: ResultsTemplateProps) {
     }, [dataGallery]);
 
     return (
-        <Main className="p-6">
+        <Main className="p-6" id="allImages">
             <h1 className="text-2xl font-bold mb-4 text-center">Resultados de Búsqueda</h1>
             <SearchBar />
             <Filters />

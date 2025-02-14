@@ -28,7 +28,7 @@ export default async function ResultsPage({ searchParams }: IParamsProps) {
 
   const response = await fetch(`${process.env.BASE_URL}/api/search?${searchParamsString}`);
   const data = await response.json();
-  console.log(data)
+  // console.log(data)
 
   return <ResultsTemplate dataGallery={data} />;
 }

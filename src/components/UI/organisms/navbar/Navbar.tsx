@@ -1,6 +1,5 @@
 import React from 'react'
 import Link from 'next/link'
-import Button from '../../atoms/button/Button'
 import './navbar.sass'
 
 interface NavbarProps {
@@ -15,7 +14,9 @@ function Navbar({className, colorBg}: NavbarProps) {
             <h1 className='navbar__heading'>visionPX</h1>
         </Link>
         <div className='navbar__btn-container'>
-            <Button color='primary'>Comienza a buscar</Button>
+            <Link href='#allImages'>
+              <span className='btn-link-label'>Explora</span>
+            </Link>
         </div>
     </nav>
   )

@@ -11,7 +11,7 @@ interface IParamsProps {
 }
 
 export default async function ResultsPage({ searchParams }: IParamsProps) {
-  const params = await searchParams;
+  const params = searchParams;
   const { query, color, orientation, size } = params;
   const page = params.page ? Number(params.page) : 1;
   if (!query) {

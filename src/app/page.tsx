@@ -10,9 +10,9 @@ interface IParamsProps {
 }
 
 export default async function Home({ searchParams }: IParamsProps) {
-  const params = await searchParams;
-  const page = params.page ? Number(params.page) : 1;
-  const response = await fetch(`${process.env.BASE_URL}/api/curated?page=${page}`);
+  const { page } = searchParams;
+  const pageNumber = page ? Number(page) : 1;
+  const response = await fetch(`${process.env.BASE_URL}/api/curated?page=${pageNumber}`);
   const data = await response.json();
   // console.log(data)
 
@@ -22,7 +22,7 @@ export default async function Home({ searchParams }: IParamsProps) {
         <Navbar />
         <Hero />
       </Header>
-      <GalleryTemplate dataGallery={data} currentPage={page} />
+      <GalleryTemplate dataGallery={data} currentPage={pageNumber} />
     </>
   );
 }

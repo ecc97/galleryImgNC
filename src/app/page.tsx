@@ -3,15 +3,18 @@ import Navbar from "@/components/UI/organisms/navbar/Navbar";
 import Hero from "@/components/UI/organisms/hero/Hero";
 import GalleryTemplate from "@/components/UI/templates/GalleryTemplate";
 
-interface Props {
-  searchParams: {
-    page?: string;
-  };
-}
 
-export default async function Home({ searchParams }: Props) {
-  const pageNumber = searchParams.page ? Number(searchParams.page) : 1;
-  const response = await fetch(`${process.env.BASE_URL}/api/curated?page=${pageNumber}`);
+type SearchParams = Promise<{ page?: string }>;
+// interface IParamsProps {
+//   searchParams: {
+//     page?: string;
+//   };
+// }
+
+export default async function Home({ searchParams }: { searchParams: SearchParams }) {
+  const params = await searchParams;
+  const page = params.page ? Number(params.page) : 1;
+  const response = await fetch(`${process.env.BASE_URL}/api/curated?page=${page}`);
   const data = await response.json();
 
   return (
@@ -20,7 +23,7 @@ export default async function Home({ searchParams }: Props) {
         <Navbar />
         <Hero />
       </Header>
-      <GalleryTemplate dataGallery={data} currentPage={pageNumber} />
+      <GalleryTemplate dataGallery={data} currentPage={page} />
     </>
   );
 }
